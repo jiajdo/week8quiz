@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 
 const PORT = process.env.port || 8080;
-const APIKEY = process.env.APIKEY;
+const APIKEY = process.env.API_KEY;
 
 app.get(() => {});
 
