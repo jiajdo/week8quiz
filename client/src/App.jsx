@@ -4,9 +4,9 @@ import Card from "./components/Card";
 
 const App = () => {
   const [data, setData] = useState([]);
-  const [questionIndex, setQuestionIndex]= useState(0)
-  const [score, setScore] = useState(0)
-  const [finish, setFinish] = useState(false)
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [finish, setFinish] = useState(false);
 
   const getData = async () => {
     const response = await fetch("http://localhost:8080/quiz");
@@ -19,26 +19,33 @@ const App = () => {
     getData();
   }, []);
 
-  const handleQuestion = () {
-    if (questionIndex === data.length-1){
-      setFinish(true)}
-      else setQuestionIndex(questionIndex+1)
-    
-  }
+  const handleQuestion = () => {
+    if (questionIndex === data.length - 1) {
+      setFinish(true);
+    } else setQuestionIndex(questionIndex + 1);
+  };
 
   const handleScore = (result) => {
-    console.log(result)
-    if (result){
-      setScore(score+1)
+    console.log(result);
+    if (result) {
+      setScore(score + 1);
     }
-    handleQuestion()
-  }
+    handleQuestion();
+  };
 
   return (
     <>
-      <h1>Take the Quiz</h1>
-
-      <Card />
+      {finish ? (
+        <>
+          <h1>Here's your result!</h1>
+          <p>Score: {score}/{data.length}</p>
+        </>
+      ) : (
+        <>
+          <h1>Take the Quiz!</h1>
+          <Card />
+        </>
+      )}
     </>
   );
 };
